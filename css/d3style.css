@@ -1,0 +1,56 @@
+body {
+  font: 10px sans-serif;
+}
+
+.axis path,
+.axis line {
+  fill: none;
+  stroke: #000;
+  shape-rendering: crispEdges;
+}
+
+.x.axis path {
+  display: none;
+}
+
+.line {
+  fill: none;
+  stroke: #DF5E5E;
+  stroke-width: 2px;
+}
+
+/* Styles for the histogram*/
+/*.bar {
+  fill: steelblue;
+}
+*/
+.bar text {
+  fill: #fff;
+}
+
+/*div.bar {
+	display: inline-block;
+    width: 20px;
+    height: 75px;    We'll override this later 
+    background-color: teal;
+    margin-right: 5px;
+}
+*/
+svg {
+  background-color: white;
+  height: 300;
+  width: 300;
+  margin-right: 5;
+}
+circle {
+  stroke: #C0C0C0;
+}
+/*rect {
+  stroke: none;
+  fill: blue;
+}*/
+
+
+</style>
+
+
