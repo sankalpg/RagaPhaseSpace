@@ -9,7 +9,7 @@ var mediaStreamSource = null;
 var buflen = 2048;
 var myBuffer = new Float32Array( buflen );
 var pasttime =1;
-var binsPerOctave = 1200;
+var binsPerOctave = 120;
 var pitch_buffer_len = 500;
 var delay = 10;
 
@@ -84,10 +84,10 @@ function init() {
     }
     initPitchYIN(samplingRate = audio_context.sampleRate);
     pitch_buffer  = createRingBuffer(pitch_buffer_len);
-    var phaseSpace = new Array(binsPerOctave);
-    for (var ii =0; ii< binsPerOctave; ii++){
-        phaseSpace[ii] = new Array(binsPerOctave);
-    }
+    // var phaseSpace = new Array(binsPerOctave);
+    // for (var ii =0; ii< binsPerOctave; ii++){
+    //     phaseSpace[ii] = new Array(binsPerOctave);
+    // }
 
     
 };
@@ -106,8 +106,7 @@ function getSamples( time ) {
     pitch_buffer.push(pitch_C)
     len_pb = pitch_buffer.getLength();
     pitch_delayed = pitch_buffer.get((pitch_buffer.getPointer()-1 -1*delay + len_pb) % len_pb)
-    console.log(pitch_C);  //logging the pitch
-    console.log(pitch_delayed);
+    console.log(pitch_C, pitch_delayed); 
     console.log("#########")
     //console.log(pitch_buffer.get(-1 % pitch_buffer.getLength()))  //logging the pitch
     }
