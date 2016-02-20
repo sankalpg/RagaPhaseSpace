@@ -2,13 +2,13 @@
 <html>
 <head>
 
-<title>Ragawise (Beta)</title>
+<title>RagaPhaseSpace (Beta)</title>
 
-<link rel="stylesheet" type="text/css" href="style/d3style.css">
+<link rel="stylesheet" type="text/css" href="css/d3style.css">
 <link href='https://fonts.googleapis.com/css?family=Alike' rel='stylesheet' type='text/css'>
-<script src="src/d3.min.js" charset="utf-8"></script>
-<script src="src/jquerymin.js"></script>
-<script src = "src/util_func.js"></script>
+<script src="thirdparty/js/d3.min.js" charset="utf-8"></script>
+<script src="thirdparty/js/jquerymin.js"></script>
+<script src = "js/util_func.js"></script>
 </head>
 
 <body onload = "init()">
@@ -16,16 +16,9 @@
 	<button onclick="startRecording()">Start recording</button>
 	<button onclick="stopRecording()">Stop recording</button>
 
-  <script src = "src/linePlot.js"></script>
-  <script src = "src/pitchYin.js"></script>
-  <!--<script src = "src/pitchdetection.js"></script>-->
-	<script src = "src/audioCapture.js"></script>
-  <script src = "src/transcription.js"></script>
-  <script src = "src/ragaRecognition.js"></script>
-    <script src = "src/ragaViz.js"></script>
-    <script src = "src/histogram.js"></script>
-
-	
+  <script src = "js/pitchYin.js"></script>
+  <script src = "js/audioCapture.js"></script>
+  
 	<!--<script src = "src/simplePlot.js"></script>-->
 
 <select id = "tonic" onchange = "tonic_change()">
@@ -42,10 +35,8 @@
   <option value="195.997"	>G</option>
   <option value=" 207.652"	>G#</option>
 
-  
 </select>
 
-<strong><h1 id = "note_val_curr">'S'</h1></strong>
 
 <script>
 function tonic_change(){
