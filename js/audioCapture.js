@@ -104,6 +104,10 @@ function getSamples( time ) {
     pitch_delayed = pitch_buffer.get((pitch_buffer.getPointer()-1 -1*delay + len_pb) % len_pb)
     console.log(pitch_C, pitch_delayed); 
     console.log("#########")
+    var d = new Date();
+    var current_time = d.getTime();
+    console.log(current_time);
+    updateGrid(pitch_C, pitch_delayed);
     //console.log(pitch_buffer.get(-1 % pitch_buffer.getLength()))  //logging the pitch
     }
     
