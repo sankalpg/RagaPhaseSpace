@@ -102,7 +102,7 @@ function initGrid() {
 /**
 * Created to initialize the variables using the d3 library.
 */
-function initDrawPhaseViz(xRange, yRange) {
+function initDrawPhaseViz() {
 
       svg = d3.select("#chart").append("svg")
           .attr("width", width + margin.left + margin.right)

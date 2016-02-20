@@ -84,12 +84,8 @@ function init() {
     }
     initPitchYIN(samplingRate = audio_context.sampleRate);
     pitch_buffer  = createRingBuffer(pitch_buffer_len);
-    // var phaseSpace = new Array(binsPerOctave);
-    // for (var ii =0; ii< binsPerOctave; ii++){
-    //     phaseSpace[ii] = new Array(binsPerOctave);
-    // }
-
     
+    initDrawPhaseViz();
 };
 
 // Function to read the samples and do some processing
