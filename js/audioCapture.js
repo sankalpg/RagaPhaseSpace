@@ -8,8 +8,6 @@ var analyser = null;
 var mediaStreamSource = null;
 var buflen = 2048;
 var myBuffer = new Float32Array( buflen );
-var pitch_buffer_len;
-var pitch_buffer;
 var pasttime =1;
 
 // Util functions 
@@ -80,17 +78,7 @@ function init() {
     } catch (e) {
       alert('No web audio support in this browser!');
     }
-    //initializing pitch visualization
-    pitch_buffer_len = 500;
-    pitch_buffer  = createRingBuffer(pitch_buffer_len);
-
-    var xRange = {min:0, max:pitch_buffer_len};
-    var yRange = {min:600, max:3600};
-    initDraw(xRange, yRange);
     initPitchYIN(samplingRate = audio_context.sampleRate);
-    initRagaViz();
-    initDraw_hist({'min': 0, 'max':19}, {'min':0.0, 'max':100.0} );
-    
     
 };
 
@@ -101,26 +89,15 @@ function getSamples( time ) {
     analyser.getFloatTimeDomainData(myBuffer);
 
     // use the time domain data for pitch estimation
-    
-    //var pitch = pitchDetect(myBuffer, audio_context.sampleRate);
     var pitch = computePitchYIN(myBuffer);
-    //
-    //draw(pitch)
-    if (pitch > tonic){
-    pitch_C = 1200*Math.log2(pitch/tonic);    
-    }
-    else{
-        pitch_C = -1;
-    }
-    pitch_buffer.push(pitch_C);    
-    transcribe_note(pitch_C);
-    // var d = new Date();
-    // //console.log(pitch, pitch_C, d.getTime()-pasttime);
-    // pasttime = d.getTime();
-    pitch_buffer.copyLinBuff();
-    var linBuff = pitch_buffer.getLinBuff();
-    draw(linBuff);  //draw the buffer
-    //console.log(pitch)  //logging the pitch
+    
+    // if (pitch > tonic){
+    // pitch_C = 1200*Math.log2(pitch/tonic);    
+    // }
+    // else{
+    //     pitch_C = -1;
+    // }
+    console.log(pitch)  //logging the pitch
 
     //This is the way we have made continuous callback to this function
     if (!window.requestAnimationFrame)
