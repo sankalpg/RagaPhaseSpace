@@ -11,7 +11,7 @@ var heightLinePlot = CANVAS_HEIGHT_LINEPLOT - marginLinePlot.top - marginLinePlo
 var xLinePlot; // scale variable for x
 var yLinePlot; // scale variable for y
 
-var binsPerOctave = 120;
+var binsPerOctave = 24;
 
 var days = new Array(binsPerOctave);
 var times = new Array(binsPerOctave);
@@ -48,8 +48,7 @@ function initDataForGrid() {
 function updateGrid(xPos, yPos) {
   xPos = Math.round(xPos);
   yPos = Math.round(yPos);
-
-  var destGrid = svg.select("#x" + xPos + "y" + yPos).style("fill", "#000000");
+  var destGrid = svg.select("#x" + xPos + "y" + yPos).style("fill", "#084B8A").transition().duration(8000).style("fill", "#FFFFFF"); 
 }
 
 function initGrid() {
@@ -62,8 +61,8 @@ function initGrid() {
               .attr("id", function(d) { return "x" + d.hour + "y" + d.day; })
               .attr("x", function(d) { return (d.hour) * gridSize; })
               .attr("y", function(d) { return (d.day) * gridSize; })
-              .attr("rx", 4)
-              .attr("ry", 4)
+              .attr("rx", 10)
+              .attr("ry", 10)
               .attr("class", "hour bordered")
               .attr("width", gridSize)
               .attr("height", gridSize)
@@ -72,7 +71,7 @@ function initGrid() {
           /*cards.transition().duration(1000)
               .style("fill", function(d) { return colorScale(d.value); });*/
 
-          cards.select("title").text(function(d) { return d.value; });
+          //cards.select("title").text(function(d) { return d.value; });
           
           cards.exit().remove();
 

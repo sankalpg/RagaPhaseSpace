@@ -9,7 +9,7 @@ var mediaStreamSource = null;
 var buflen = 2048;
 var myBuffer = new Float32Array( buflen );
 var pasttime =1;
-var binsPerOctave = 120;
+var binsPerOctave = 24;
 var pitch_buffer_len = 500;
 var delay = 10;
 
@@ -102,13 +102,10 @@ function getSamples( time ) {
     pitch_buffer.push(pitch_C)
     len_pb = pitch_buffer.getLength();
     pitch_delayed = pitch_buffer.get((pitch_buffer.getPointer()-1 -1*delay + len_pb) % len_pb)
-    console.log(pitch_C, pitch_delayed); 
-    console.log("#########")
-    var d = new Date();
-    var current_time = d.getTime();
-    console.log(current_time);
+    // console.log(pitch_C, pitch_delayed); 
+    // console.log("#########")
     updateGrid(pitch_C, pitch_delayed);
-    //console.log(pitch_buffer.get(-1 % pitch_buffer.getLength()))  //logging the pitch
+    // //console.log(pitch_buffer.get(-1 % pitch_buffer.getLength()))  //logging the pitch
     }
     
     // console.log(pitch)  //logging the pitch
