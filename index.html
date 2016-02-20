@@ -16,10 +16,18 @@
 	<button onclick="startRecording()">Start recording</button>
 	<button onclick="stopRecording()">Stop recording</button>
 
+  <br/>
+
+  <div id="chart"></div>
+    <!-- <div id="dataset-picker">
+  </div> -->
+
   <script src = "js/pitchYin.js"></script>
   <script src = "js/audioCapture.js"></script>
   
-	<!--<script src = "src/simplePlot.js"></script>-->
+	<script src = "js/phaseViz.js">
+
+  </script>
 
 <select id = "tonic" onchange = "tonic_change()">
   <option value="110.0"		>A</option>
