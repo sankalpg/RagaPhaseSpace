@@ -9,6 +9,10 @@ var mediaStreamSource = null;
 var buflen = 2048;
 var myBuffer = new Float32Array( buflen );
 var pasttime =1;
+var binsPerOctave = 1200;
+var pitch_buffer_len = 500;
+var delay = 10;
+
 
 // Util functions 
     function __log(e, data) {
@@ -79,6 +83,12 @@ function init() {
       alert('No web audio support in this browser!');
     }
     initPitchYIN(samplingRate = audio_context.sampleRate);
+    pitch_buffer  = createRingBuffer(pitch_buffer_len);
+    var phaseSpace = new Array(binsPerOctave);
+    for (var ii =0; ii< binsPerOctave; ii++){
+        phaseSpace[ii] = new Array(binsPerOctave);
+    }
+
     
 };
 
@@ -91,13 +101,18 @@ function getSamples( time ) {
     // use the time domain data for pitch estimation
     var pitch = computePitchYIN(myBuffer);
     
-    // if (pitch > tonic){
-    // pitch_C = 1200*Math.log2(pitch/tonic);    
-    // }
-    // else{
-    //     pitch_C = -1;
-    // }
-    console.log(pitch)  //logging the pitch
+    if (pitch > 0){
+    pitch_C = binsPerOctave*Math.log2(pitch/tonic) % binsPerOctave;    
+    pitch_buffer.push(pitch_C)
+    len_pb = pitch_buffer.getLength();
+    pitch_delayed = pitch_buffer.get((pitch_buffer.getPointer()-1 -1*delay + len_pb) % len_pb)
+    console.log(pitch_C);  //logging the pitch
+    console.log(pitch_delayed);
+    console.log("#########")
+    //console.log(pitch_buffer.get(-1 % pitch_buffer.getLength()))  //logging the pitch
+    }
+    
+    // console.log(pitch)  //logging the pitch
 
     //This is the way we have made continuous callback to this function
     if (!window.requestAnimationFrame)

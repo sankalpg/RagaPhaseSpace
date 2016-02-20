@@ -5,8 +5,8 @@ Array.max = function( array ){
 //Circular buffer to store float32
 var createRingBuffer = function(length){
 	var pointer = 0, buffer = new Float32Array(length), bufferLin = new Float32Array(length);
+	var length = length;
 	for (var ii =0; ii<length; ii++){
-		buffer[ii]=0;
 		buffer[ii]=0;
 	} 
   	return {
@@ -21,6 +21,8 @@ var createRingBuffer = function(length){
 		    		bufferLin[ii] = buffer[(ii+pointer)%length];
 		    	}
 		    },
+		    getPointer: function(){return pointer},
+		    getLength: function(){return length},
 		    getLinBuff: function(key){return bufferLin;}
   };
 };

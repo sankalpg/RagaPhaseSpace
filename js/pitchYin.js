@@ -2,6 +2,11 @@
 This is a js implementation of YIN algorithm for detecting pitch from an audio signal.
 Ref + Lis -> coming soon...
 */
+tonic = 110.0
+function setTonic(val){
+    tonic = val/2.0;
+    console.log(tonic);
+}
 
 //Crucial parameters
 var min_f0;
@@ -14,7 +19,6 @@ var minTau = -1;
 var maxTau = -1;
 var nDelays = -1
 var Thsld_energy_per_frame = 0.0005;
-
 
 function findLocalMinimas(buffer, minTau, maxTau){
 
