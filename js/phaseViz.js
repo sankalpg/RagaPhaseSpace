@@ -13,23 +13,19 @@ var yLinePlot; // scale variable for y
 
 var binsPerOctave = 24;
 
+function setBins(val){
+    binsPerOctave = val;
+    console.log(binsPerOctave);
+    initDrawPhaseViz();    
+}
+
 var days = new Array(binsPerOctave);
 var times = new Array(binsPerOctave);
 
 /////// New variables /////////////////////////////
 var data = [], cards, svg;
-
-var margin = { top: 20, right: 20, bottom: 20, left: 20 },
-          width = 600 - margin.left - margin.right,
-          height = 600 - margin.top - margin.bottom,
-          gridSize = Math.floor(width / binsPerOctave),
-          legendElementWidth = gridSize*2,
-          buckets = 9,
-          colors = ["#ffffd9","#edf8b1","#c7e9b4","#7fcdbb","#41b6c4","#1d91c0","#225ea8","#253494","#081d58"]; // alternatively colorbrewer.YlGnBu[9]
-
-var colorScale = d3.scale.quantile()
-              .domain([0, buckets - 1, d3.max(data, function (d) { return d.value; })])
-              .range(colors);
+var margin;
+var colorScale;
 
 
 function initDataForGrid() {
@@ -43,6 +39,18 @@ function initDataForGrid() {
       data.push(objTmp);
     };
   }
+  margin = { top: 20, right: 20, bottom: 20, left: 20 },
+          width = 600 - margin.left - margin.right,
+          height = 600 - margin.top - margin.bottom,
+          gridSize = Math.floor(width / binsPerOctave),
+          legendElementWidth = gridSize*2,
+          buckets = 9,
+          colors = ["#ffffd9","#edf8b1","#c7e9b4","#7fcdbb","#41b6c4","#1d91c0","#225ea8","#253494","#081d58"]; // alternatively colorbrewer.YlGnBu[9]
+
+   colorScale = d3.scale.quantile()
+              .domain([0, buckets - 1, d3.max(data, function (d) { return d.value; })])
+              .range(colors);
+
 }
 
 function updateGrid(xPos, yPos) {
@@ -102,14 +110,17 @@ function initGrid() {
 * Created to initialize the variables using the d3 library.
 */
 function initDrawPhaseViz() {
-
-      svg = d3.select("#chart").append("svg")
+	
+	initDataForGrid();
+	d3.select("#chart").selectAll("*").remove();
+	      
+	svg = d3.select("#chart").append("svg")
           .attr("width", width + margin.left + margin.right)
           .attr("height", height + margin.top + margin.bottom)
           .append("g")
           .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
-      initDataForGrid();
+      
 
       initGrid();
       
